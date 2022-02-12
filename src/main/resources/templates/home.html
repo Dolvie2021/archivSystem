@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchivSystem</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="images/DA-Tab-Logo.ico">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    
+   
+    
+</head>
+<body>
+
+<div class ="headerContent">
+  <nav class="navbar navbar-expand-lg navbar-light ">
+  
+    <a class="navbar-brand" href="/"><h2>DatenArchiv</h2></a>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+     
+    <div class="collapse navbar-collapse" id="navbarNav">
+           
+               <ul class="navbar-nav ms-auto">
+                  
+                   <li class="nav-item sizer"> <a class="nav-link"><span class="username" th:text="${#authentication.name}">Username</span></a>
+                   </li>
+              
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+			                  <a class="nav-link sizer" href="/admin">Admin</a>
+			        </li>
+			        <li class="nav-item bold"><a class="nav-link" th:href="@{/logout}">Logout</a> </li>
+               </ul>
+               
+            
+    </div>
+ 
+</nav>
+</div>
+    
+<!--<h4 th:each="messages : ${answerToDisplay}" th:style="${messages.contains('schon') || messages.contains('nicht') || messages.contains('zu')} ? 'color:red': 'color:green'" th:text="${messages}"></h4>-->
+<div th:if="${success_message}" th:text="${success_message}" class="alert alert-success" style="text-align: center"></div>
+
+ <div class="main-button" id= "menu">
+    <form th:action="@{/newdatenhochladen}" method="get">
+        <div class="hoch">
+            <button type="submit" name="btn-upload-main">Neue Daten hochladen</button>
+        </div></form>
+    <form th:action="@{/archivedfiles}" method="get">
+        <div class="hoch">
+            <button type="submit" name="btn-open-file">Daten anzeigen</button>
+        </div>
+    </form>
+</div> 
+
+
+
+</body>
+</html>
